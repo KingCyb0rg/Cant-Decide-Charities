@@ -9,4 +9,7 @@
     <string name="start_randomizer">Start Randomizer</string>
     <string name="allow_duplicates">Allow Duplicates</string>
     <string name="save_rolled_charities">Save Rolled Charities</string>
+    <string name="visit_their_website">Visit Their Website!</string>
+    <string name="save_charity">Save Charity</string>
+    <string name="roll_again">Roll Again</string>
 </resources>

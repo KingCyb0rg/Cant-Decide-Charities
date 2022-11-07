@@ -20,6 +20,7 @@ public class HomeFragment extends Fragment {
     private Button startRandomizerBtn;
     private Spinner causesSpinner;
     private View rootView;
+    private RandomizerFragment randomizerFragment;
 
 
     public HomeFragment() { /* Required empty public constructor */}
@@ -40,8 +41,8 @@ public class HomeFragment extends Fragment {
         causesSpinner.setAdapter(adapter);
 
         startRandomizerBtn.setOnClickListener(view -> {
-            DialogFragment dialogFragment = new DialogFragment();
-            dialogFragment.show(getActivity().getSupportFragmentManager(), "Random Charity Dialogue");
+            randomizerFragment = new RandomizerFragment();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, randomizerFragment).commit();
         });
         return rootView;
     }

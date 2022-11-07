@@ -7,63 +7,44 @@
     android:layout_gravity="center"
     tools:context=".SettingsFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="394dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="192dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
+    <Switch
+        android:id="@+id/enableDuplicates2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
+        android:minHeight="48dp"
+        android:text="@string/save_rolled_charities"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toEndOf="@+id/enableDuplicates"
+        app:layout_constraintTop_toBottomOf="@+id/RegionSpinner"
+        app:layout_constraintVertical_bias="0.376"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-        <Switch
-            android:id="@+id/switch3"
-            android:layout_width="172dp"
-            android:layout_height="52dp"
-            android:text="Switch" />
-
-        <Switch
-            android:id="@+id/switch4"
-            android:layout_width="172dp"
-            android:layout_height="52dp"
-            android:text="Switch" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="394dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="36dp"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+    <Switch
+        android:id="@+id/enableDuplicates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
+        android:minHeight="48dp"
+        android:text="@string/allow_duplicates"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="172dp"
-            android:layout_height="52dp"
-            android:text="Switch" />
-
-        <Switch
-            android:id="@+id/switch2"
-            android:layout_width="172dp"
-            android:layout_height="52dp"
-            android:text="Switch" />
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegionSpinner"
+        app:layout_constraintVertical_bias="0.376"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/RegionSpinner"
         android:layout_width="309dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:entries="@array/regions"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.427" />
 </androidx.constraintlayout.widget.ConstraintLayout>

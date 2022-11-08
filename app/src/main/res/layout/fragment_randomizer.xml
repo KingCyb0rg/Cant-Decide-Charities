@@ -8,9 +8,10 @@
     >
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/CharityResult"
         android:layout_width="299dp"
         android:layout_height="204dp"
+        android:gravity="center"
         android:text="@string/Charity_Description"
         android:textColor="#000000"
         app:drawableTopCompat="@drawable/ic_launcher_background"
@@ -23,7 +24,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="280dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
@@ -31,13 +32,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/CharityResult"
         app:layout_constraintVertical_bias="0.022">
 
         <Button
             android:id="@+id/ApproveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_baseline_check_circle_24"
             android:contentDescription="@string/save_charity" />
 
@@ -47,8 +48,8 @@
 
         <Button
             android:id="@+id/DeclineButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/ic_baseline_cancel_24"
             android:contentDescription="@string/roll_again" />
 

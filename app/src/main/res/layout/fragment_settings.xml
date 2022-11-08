@@ -8,7 +8,7 @@
     tools:context=".SettingsFragment">
 
     <Switch
-        android:id="@+id/enableDuplicates2"
+        android:id="@+id/SaveRolledCharities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="264dp"
@@ -17,13 +17,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.611"
-        app:layout_constraintStart_toEndOf="@+id/enableDuplicates"
+        app:layout_constraintStart_toEndOf="@+id/EnableDuplicatesSettings"
         app:layout_constraintTop_toBottomOf="@+id/RegionSpinner"
         app:layout_constraintVertical_bias="0.376"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
-        android:id="@+id/enableDuplicates"
+        android:id="@+id/EnableDuplicatesSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="264dp"
@@ -41,7 +41,6 @@
         android:id="@+id/RegionSpinner"
         android:layout_width="309dp"
         android:layout_height="51dp"
-        android:entries="@array/regions"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

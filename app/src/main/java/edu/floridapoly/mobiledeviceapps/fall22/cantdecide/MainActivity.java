@@ -3,6 +3,7 @@ package edu.floridapoly.mobiledeviceapps.fall22.cantdecide;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Button startRandomizerBtn;
+    String apiKey = "62c0b716a7f2b4e7ed7a47b062545cbf";
+    String pledgeUrl = "https://api.pledge.to/v1/organizations";
 
     HomeFragment homeFragment = new HomeFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
@@ -47,10 +50,25 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
+
+        generateCharityDatabase();
+
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+
+    protected void generateCharityDatabase() {
+
+    }
+
+    class getWebServiceData extends AsyncTask {
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            return null;
+        }
+    }
+
 }

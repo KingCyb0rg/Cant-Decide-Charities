@@ -39,7 +39,7 @@ public class RandomizerFragment extends Fragment {
             Toast.makeText(getContext(), "Charity accepted, added to rolled charity listing", Toast.LENGTH_SHORT).show();
         });
         declineButton.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Charity accepted, added to rolled charity listing", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Charity declined, rolling next charity", Toast.LENGTH_SHORT).show();
         });
         websiteButton.setOnClickListener(view -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.pledge.to/organizations"));

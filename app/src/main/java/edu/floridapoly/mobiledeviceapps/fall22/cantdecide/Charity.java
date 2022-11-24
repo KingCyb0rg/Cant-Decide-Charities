@@ -6,11 +6,11 @@ public class Charity {
     private String alias;
     private String mission;
     private String region;
-    private Causes[] causes;
+    private String[] causes;
     private String url;
 
     public Charity(){}
-    public Charity(long id, String name, String mission, String region, Causes[] causes, String url) {
+    public Charity(long id, String name, String mission, String region, String[] causes, String url) {
         this.id = id;
         this.name = name;
         this.mission = mission;

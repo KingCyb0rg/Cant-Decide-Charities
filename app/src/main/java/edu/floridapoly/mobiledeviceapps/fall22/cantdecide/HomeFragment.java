@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,12 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 
-    private Button startRandomizerBtn;
-    private Spinner causesSpinner;
-//    private Switch enableDuplicates;
-    private View rootView;
     private RandomizerFragment randomizerFragment;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
 
     public HomeFragment() { /* Required empty public constructor */}
@@ -38,20 +34,17 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        startRandomizerBtn = rootView.findViewById(R.id.RandomizeButton);
-        causesSpinner = rootView.findViewById(R.id.CausesSpinner);
-//        enableDuplicates = rootView.findViewById(R.id.EnableDuplicatesHome);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        Button startRandomizerBtn = rootView.findViewById(R.id.RandomizeButton);
+        Spinner causesSpinner = rootView.findViewById(R.id.CausesSpinner);
+        TextView regionText = rootView.findViewById(R.id.RegionText);
+        TextView duplicatesText = rootView.findViewById(R.id.DuplicateText);
+        TextView saveText = rootView.findViewById(R.id.SaveText);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        sharedPreferences = getActivity().getSharedPreferences("Randomizer Settings", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-//        enableDuplicates.setOnCheckedChangeListener(null);
-//        enableDuplicates.setChecked(sharedPreferences.getBoolean("Enable Duplicates", true));
-//        enableDuplicates.setOnCheckedChangeListener((compoundButton, b) -> {
-//            editor.putBoolean("Enable Duplicates", b);
-//            Toast.makeText(getActivity(), "Enable Duplicates is " + (b ? "on" : "off") + ". State added to Shared Preference", Toast.LENGTH_SHORT).show();
-//        });
+        regionText.setText(sharedPreferences.getString("Region Filter", ""));
+        duplicatesText.setText(String.valueOf(sharedPreferences.getBoolean("Enable Duplicates", false)));
+        saveText.setText(String.valueOf(sharedPreferences.getBoolean("Save Charities", true)));
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.causes, android.R.layout.simple_spinner_item);
         causesSpinner.setAdapter(adapter);

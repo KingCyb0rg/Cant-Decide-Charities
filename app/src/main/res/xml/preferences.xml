@@ -17,13 +17,8 @@
 
         <ListPreference
             android:entries="@array/regions"
+            android:entryValues="@array/region_abbreviations"
             android:key="Region Filter"
-            android:title="Charity Region"
-            app:entryValues="@array/regions" />
-        <MultiSelectListPreference
-            android:entries="@array/causes"
-            android:key="Cause Filter"
-            android:title="@string/select_a_cause"
-            app:entryValues="@array/causes" />
+            android:title="Charity Region" />
     </PreferenceCategory>
 </PreferenceScreen>

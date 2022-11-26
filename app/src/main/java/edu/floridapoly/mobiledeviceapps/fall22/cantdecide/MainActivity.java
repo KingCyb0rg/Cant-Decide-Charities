@@ -58,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
+        generateCausesDatabase();
+    }
+
+    private void generateCausesDatabase() {
+        DBHelper dbHelper = new DBHelper(getApplicationContext());
 
     }
 

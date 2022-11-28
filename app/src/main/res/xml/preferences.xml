@@ -20,5 +20,10 @@
             android:entryValues="@array/region_abbreviations"
             android:key="Region Filter"
             android:title="Charity Region" />
+        <ListPreference
+            android:entries="@array/primary_causes"
+            android:entryValues="@array/primary_causes_filter"
+            android:key="Cause Filter"
+            android:title="Charity Cause" />
     </PreferenceCategory>
 </PreferenceScreen>

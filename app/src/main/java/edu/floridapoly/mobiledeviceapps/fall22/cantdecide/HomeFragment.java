@@ -36,18 +36,16 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         Button startRandomizerBtn = rootView.findViewById(R.id.RandomizeButton);
-        Spinner causesSpinner = rootView.findViewById(R.id.CausesSpinner);
+        TextView causeText = rootView.findViewById(R.id.CauseText);
         TextView regionText = rootView.findViewById(R.id.RegionText);
         TextView duplicatesText = rootView.findViewById(R.id.DuplicateText);
         TextView saveText = rootView.findViewById(R.id.SaveText);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
+        causeText.setText(sharedPreferences.getString("Cause Filter", ""));
         regionText.setText(sharedPreferences.getString("Region Filter", ""));
         duplicatesText.setText(String.valueOf(sharedPreferences.getBoolean("Enable Duplicates", false)));
         saveText.setText(String.valueOf(sharedPreferences.getBoolean("Save Charities", true)));
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.causes, android.R.layout.simple_spinner_item);
-        causesSpinner.setAdapter(adapter);
 
         startRandomizerBtn.setOnClickListener(view -> {
             randomizerFragment = new RandomizerFragment();

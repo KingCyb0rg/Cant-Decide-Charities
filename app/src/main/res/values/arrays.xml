@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="causes">
+    <string-array name="primary_causes">
+        <item>None</item>
+        <item>Animals</item>
+        <item>Art</item>
         <item>Disaster Relief</item>
+        <item>Education</item>
+        <item>Environment</item>
+        <item>Health</item>
+        <item>Justice</item>
+        <item>Science</item>
         <item>Society</item>
-        <item>Reduced Inequalities</item>
-        <item>Life on Land</item>
     </string-array>
+    <string-array name="primary_causes_filter">
+        <item>none</item>
+        <item>animals</item>
+        <item>art</item>
+        <item>disaster-relief</item>
+        <item>education</item>
+        <item>environment</item>
+        <item>health</item>
+        <item>justice</item>
+        <item>science</item>
+        <item>society</item>
+    </string-array>
+
     <string-array name="regions">
+        <item>None</item>
         <item>Alabama</item>
         <item>Alaska</item>
         <item>American Samoa</item>
@@ -63,7 +83,9 @@
         <item>Wisconsin</item>
         <item>Wyoming</item>
     </string-array>
+
     <string-array name="region_abbreviations">
+        <item>none</item>
         <item>AL</item>
         <item>AK</item>
         <item>AS</item>

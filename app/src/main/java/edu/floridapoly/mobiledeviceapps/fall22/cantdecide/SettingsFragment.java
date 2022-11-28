@@ -13,7 +13,9 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootkey) {
         setPreferencesFromResource(R.xml.preferences, rootkey);
         ListPreference regionsPreference = findPreference("Region Filter");
+        ListPreference causePreference = findPreference("Cause Filter");
         regionsPreference.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+        causePreference.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
     }
 
 }

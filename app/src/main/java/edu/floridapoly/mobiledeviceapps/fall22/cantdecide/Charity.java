@@ -1,22 +1,68 @@
 package edu.floridapoly.mobiledeviceapps.fall22.cantdecide;
 
 public class Charity {
-    private long id;
+    private String id;
     private String name;
-    private String alias;
     private String mission;
     private String region;
-    private Causes[] causes;
-    private String url;
+    private String cause;
+    private String website;
 
     public Charity(){}
-    public Charity(long id, String name, String mission, String region, Causes[] causes, String url) {
+    public Charity(String id, String name, String mission, String website/*, String cause, String region */) {
         this.id = id;
         this.name = name;
         this.mission = mission;
-        this.region = region;
-        this.causes = causes;
-        this.url = url;
+        this.website = website;
+//        this.cause = cause;
+//        this.region = region;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMission() {
+        return mission;
+    }
+
+    public void setMission(String mission) {
+        this.mission = mission;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
 }

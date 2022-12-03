@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Randomizer Behavior">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="Enable Duplicates"
+            android:title="@string/allow_duplicates" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="Save Charities"
+            android:title="@string/save_rolled_charities" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Randomizer Filters">
+
+        <ListPreference
+            android:entries="@array/regions"
+            android:entryValues="@array/region_abbreviations"
+            android:key="Region Filter"
+            android:title="Charity Region" />
+        <ListPreference
+            android:entries="@array/primary_causes"
+            android:entryValues="@array/primary_causes_filter"
+            android:key="Cause Filter"
+            android:title="Charity Cause" />
+    </PreferenceCategory>
+</PreferenceScreen>

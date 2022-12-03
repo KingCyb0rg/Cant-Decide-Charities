@@ -39,7 +39,6 @@ public class RandomizerFragment extends Fragment {
 
     View rootView;
     Button acceptButton, declineButton, websiteButton;
-    String name, mission, websiteURL, logoURL, ID;
     TextView charityTitle, charityDescription;
     ImageView charityLogo;
     Charity randomCharity;
@@ -47,6 +46,8 @@ public class RandomizerFragment extends Fragment {
     Handler handler;
 
     String apiKey = "62c0b716a7f2b4e7ed7a47b062545cbf";
+    String name, mission, websiteURL, logoURL, ID;
+    boolean allowDuplicates, saveCharities;
 
 
     public RandomizerFragment() {/* Required empty public constructor */}
@@ -151,18 +152,11 @@ public class RandomizerFragment extends Fragment {
         private void parseRandomCharity(String path, StringBuffer response, String responseText) {
             try {
                 int totalResults, generatedPos, targetPage, resultIndex, perPage;
-                // Convert the result from sendHttpRequest into a JSONObject
                 JSONObject results = new JSONObject(responseText);
-                // Set totalResults to either the total_count integer in the JSON or 500 based on which is smaller (Necessary because of pagination limitations)
                 totalResults = Math.min(results.getInt("total_count"), 1000);
-                // Parse the current perPage value from the results JSON
                 perPage = results.getInt("per");
-                // Generate a random number using the totalResults value as the upper bound
                 generatedPos = (new Random()).nextInt(totalResults);
-                // Find the target page by dividing the position by the amount of results per page
-                // Use Math.ceil to move all decimal values to the next highest integer
                 targetPage = (int) Math.ceil(generatedPos/(double) perPage);
-                // check if the target page is not the first page of the request result
                 if (targetPage != 1) {
                     // Generate new api response to go to appropriate page
                     responseText = null;
@@ -173,15 +167,16 @@ public class RandomizerFragment extends Fragment {
                     results = new JSONObject(responseText);
                 }
                 // Find the position of the random charity
-                resultIndex = (generatedPos % perPage) - 1;
+                resultIndex = (generatedPos % (perPage-1));
                 // Fetch the random charity data from the initial JSONObject
                 JSONArray resultsJSONArray = results.getJSONArray("results");
                 JSONObject targetCharity = resultsJSONArray.getJSONObject(resultIndex);
-
-                name = targetCharity.getString("name");
-                mission = targetCharity.getString("mission");
-                websiteURL = targetCharity.getString("website_url");
-                logoURL = targetCharity.getString("logo_url");
+                ID = targetCharity.getString("id");
+                if ()
+                    name = targetCharity.getString("name");
+                    mission = targetCharity.getString("mission");
+                    websiteURL = targetCharity.getString("website_url");
+                    logoURL = targetCharity.getString("logo_url");
 
                 InputStream inputStream = new URL(logoURL).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);

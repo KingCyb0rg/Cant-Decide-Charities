@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -41,13 +40,15 @@ public class RandomizerFragment extends Fragment {
     Button acceptButton, declineButton, websiteButton;
     TextView charityTitle, charityDescription;
     ImageView charityLogo;
-    Charity randomCharity;
-
     Handler handler;
 
     String apiKey = "62c0b716a7f2b4e7ed7a47b062545cbf";
     String name, mission, websiteURL, logoURL, ID;
     boolean allowDuplicates, saveCharities;
+
+    DBHelper dbHelper;
+    Charity randomCharity;
+    SharedPreferences sharedPreferences;
 
 
     public RandomizerFragment() {/* Required empty public constructor */}
@@ -56,7 +57,11 @@ public class RandomizerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         handler = new Handler();
-        generateRandomCharity();
+        dbHelper = new DBHelper(getContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        allowDuplicates = sharedPreferences.getBoolean("Enable Duplicates", false);
+        saveCharities = sharedPreferences.getBoolean("Save Charities", true);
+        startRandomizer();
     }
 
     @Override
@@ -72,17 +77,19 @@ public class RandomizerFragment extends Fragment {
         charityLogo = rootView.findViewById(R.id.CharityLogo);
         charityLogo.setImageBitmap(null);
 
-//        charityTitle.setText("Test Charity");
-//        charityDescription.setText("This is a test");
-
         acceptButton.setOnClickListener(view -> {
-            randomCharity = new Charity(ID, name, mission, websiteURL);
-
-            Toast.makeText(getContext(), "Charity accepted, added to rolled charity listing", Toast.LENGTH_SHORT).show();
+            if (saveCharities) {
+                randomCharity = new Charity(ID, name, mission, websiteURL);
+                dbHelper.insertCharity(randomCharity);
+                Toast.makeText(getContext(), "Charity accepted, added to rolled charity listing", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(getContext(), "Charity saving disabled, please enable in settings!", Toast.LENGTH_SHORT).show();
+            startRandomizer();
         });
         declineButton.setOnClickListener(view -> {
             Toast.makeText(getContext(), "Charity declined, rolling next charity", Toast.LENGTH_SHORT).show();
-            generateRandomCharity();
+            startRandomizer();
         });
         websiteButton.setOnClickListener(view -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(websiteURL));
@@ -93,13 +100,12 @@ public class RandomizerFragment extends Fragment {
         return rootView;
     }
 
-    protected void generateRandomCharity() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        String regionFilter = sharedPreferences.getString("Region Filter", "");
-        String causeFilter = sharedPreferences.getString("Cause Filter", "");
+    protected void startRandomizer() {
+        String regionFilter = sharedPreferences.getString("Region Filter", null);
+        String causeFilter = sharedPreferences.getString("Cause Filter", null);
         String query = "https://api.pledge.to/v1/organizations?q="
-                + ((!regionFilter.equals("none")) ? "&region=" + regionFilter : "")
-                + ((!causeFilter.equals("none")) ? "&cause=" + causeFilter : "");
+                + ((regionFilter != null) ? "&region=" + regionFilter : "")
+                + ((causeFilter != null) ? "&cause=" + causeFilter : "");
 
         new getWebServiceData().execute(query);
 
@@ -151,39 +157,49 @@ public class RandomizerFragment extends Fragment {
 
         private void parseRandomCharity(String path, StringBuffer response, String responseText) {
             try {
-                int totalResults, generatedPos, targetPage, resultIndex, perPage;
-                JSONObject results = new JSONObject(responseText);
-                totalResults = Math.min(results.getInt("total_count"), 1000);
-                perPage = results.getInt("per");
-                generatedPos = (new Random()).nextInt(totalResults);
-                targetPage = (int) Math.ceil(generatedPos/(double) perPage);
-                if (targetPage != 1) {
-                    // Generate new api response to go to appropriate page
-                    responseText = null;
-                    response.delete(0, response.length());
-                    String newPath = path + "&page=" + targetPage;
-                    sendHttpRequest(newPath, response);
-                    responseText = response.toString();
-                    results = new JSONObject(responseText);
-                }
-                // Find the position of the random charity
-                resultIndex = (generatedPos % (perPage-1));
-                // Fetch the random charity data from the initial JSONObject
-                JSONArray resultsJSONArray = results.getJSONArray("results");
-                JSONObject targetCharity = resultsJSONArray.getJSONObject(resultIndex);
+                JSONObject targetCharity = getRandomCharity(path, response, responseText);
                 ID = targetCharity.getString("id");
-                if ()
-                    name = targetCharity.getString("name");
-                    mission = targetCharity.getString("mission");
-                    websiteURL = targetCharity.getString("website_url");
-                    logoURL = targetCharity.getString("logo_url");
+                if (!allowDuplicates) {
+                    while (dbHelper.isDuplicate(ID)) {
+                        targetCharity = getRandomCharity(path, response, responseText);
+                        ID = targetCharity.getString("id");
+                    }
+                }
 
+                name = targetCharity.getString("name");
+                mission = targetCharity.getString("mission");
+                websiteURL = targetCharity.getString("website_url");
+                logoURL = targetCharity.getString("logo_url");
+
+                // Turn the http url from the charity JSON into a viewable image
                 InputStream inputStream = new URL(logoURL).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        private JSONObject getRandomCharity(String path, StringBuffer response, String responseText) throws JSONException {
+            int totalResults, generatedPos, targetPage, resultIndex, perPage;
+            JSONObject results = new JSONObject(responseText);
+            totalResults = Math.min(results.getInt("total_count"), 1000);
+            perPage = results.getInt("per");
+            generatedPos = (new Random()).nextInt(totalResults);
+            targetPage = (int) Math.ceil(generatedPos/(double) perPage);
+            if (targetPage != 1) {
+                // Generate new api response to go to appropriate page
+                response.delete(0, response.length());
+                String newPath = path + "&page=" + targetPage;
+                sendHttpRequest(newPath, response);
+                responseText = response.toString();
+                results = new JSONObject(responseText);
+            }
+            // Find the position of the random charity
+            resultIndex = (generatedPos % (perPage-1));
+            // Fetch the random charity data from the initial JSONObject
+            JSONArray resultsJSONArray = results.getJSONArray("results");
+            return resultsJSONArray.getJSONObject(resultIndex);
         }
 
         private void sendHttpRequest(String path, StringBuffer response) {

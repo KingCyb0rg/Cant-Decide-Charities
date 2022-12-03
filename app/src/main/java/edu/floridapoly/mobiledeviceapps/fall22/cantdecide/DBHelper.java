@@ -26,8 +26,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CREATE_CHARITY_TABLE =
             "CREATE TABLE " + CHARITY_TABLE_NAME + "("
             + COLUMN_ID + " TEXT PRIMARY KEY, "
-            + COLUMN_NAME + " TEXT, " + COLUMN_MISSION + " TEXT, "
-            + COLUMN_REGION + " TEXT, " + COLUMN_WEBSITE + " TEXT"
+            + COLUMN_NAME + " TEXT, "
+            + COLUMN_MISSION + " TEXT, "
+//            + COLUMN_REGION + " TEXT, "
+            + COLUMN_WEBSITE + " TEXT"
             + ")";
 
     public DBHelper(Context context) {
@@ -59,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 charity.setId(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)));
                 charity.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)));
                 charity.setMission(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MISSION)));
-                charity.setRegion(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REGION)));
+//                charity.setRegion(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REGION)));
                 charity.setWebsite(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WEBSITE)));
                 charities.add(charity);
             } while (cursor.moveToNext());
@@ -67,15 +69,15 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return charities;
     }
-    public long insertCharity(String id, String name, String mission, String region, String website) {
+    public long insertCharity(Charity charity) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, id);
-        values.put(COLUMN_NAME, name);
-        values.put(COLUMN_MISSION, mission);
-        values.put(COLUMN_REGION, region);
-        values.put(COLUMN_WEBSITE, website);
+        values.put(COLUMN_ID, charity.getId());
+        values.put(COLUMN_NAME, charity.getName());
+        values.put(COLUMN_MISSION, charity.getMission());
+//        values.put(COLUMN_REGION, charity.getRegion());
+        values.put(COLUMN_WEBSITE, charity.getWebsite());
 
         return db.insert(CHARITY_TABLE_NAME, null, values);
     }

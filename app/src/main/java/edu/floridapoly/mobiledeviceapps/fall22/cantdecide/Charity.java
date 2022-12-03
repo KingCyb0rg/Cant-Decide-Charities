@@ -9,11 +9,13 @@ public class Charity {
     private String website;
 
     public Charity(){}
-    public Charity(String id, String name, String mission, String website) {
+    public Charity(String id, String name, String mission, String website/*, String cause, String region */) {
         this.id = id;
         this.name = name;
         this.mission = mission;
         this.website = website;
+//        this.cause = cause;
+//        this.region = region;
     }
 
     public String getId() {

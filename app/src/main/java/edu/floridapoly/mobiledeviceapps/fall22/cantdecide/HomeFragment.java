@@ -42,8 +42,8 @@ public class HomeFragment extends Fragment {
         TextView saveText = rootView.findViewById(R.id.SaveText);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        causeText.setText(sharedPreferences.getString("Cause Filter", ""));
-        regionText.setText(sharedPreferences.getString("Region Filter", ""));
+        causeText.setText(sharedPreferences.getString("Cause Filter", null));
+        regionText.setText(sharedPreferences.getString("Region Filter", null));
         duplicatesText.setText(String.valueOf(sharedPreferences.getBoolean("Enable Duplicates", false)));
         saveText.setText(String.valueOf(sharedPreferences.getBoolean("Save Charities", true)));
 

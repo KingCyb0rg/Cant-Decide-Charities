@@ -4,18 +4,14 @@ public class Charity {
     private String id;
     private String name;
     private String mission;
-    private String region;
-    private String cause;
     private String website;
 
     public Charity(){}
-    public Charity(String id, String name, String mission, String website/*, String cause, String region */) {
+    public Charity(String id, String name, String mission, String website) {
         this.id = id;
         this.name = name;
         this.mission = mission;
         this.website = website;
-//        this.cause = cause;
-//        this.region = region;
     }
 
     public String getId() {
@@ -48,21 +44,5 @@ public class Charity {
 
     public void setWebsite(String website) {
         this.website = website;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getCause() {
-        return cause;
-    }
-
-    public void setCause(String cause) {
-        this.cause = cause;
     }
 }

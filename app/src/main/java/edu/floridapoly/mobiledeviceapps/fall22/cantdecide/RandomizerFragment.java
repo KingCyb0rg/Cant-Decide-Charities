@@ -3,6 +3,8 @@ package edu.floridapoly.mobiledeviceapps.fall22.cantdecide;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.BreakIterator;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 
 public class RandomizerFragment extends Fragment {
@@ -101,11 +105,11 @@ public class RandomizerFragment extends Fragment {
     }
 
     protected void startRandomizer() {
-        String regionFilter = sharedPreferences.getString("Region Filter", null);
-        String causeFilter = sharedPreferences.getString("Cause Filter", null);
+        String regionFilter = sharedPreferences.getString("Region Filter", "");
+        String causeFilter = sharedPreferences.getString("Cause Filter", "");
         String query = "https://api.pledge.to/v1/organizations?q="
-                + ((regionFilter != null) ? "&region=" + regionFilter : "")
-                + ((causeFilter != null) ? "&cause=" + causeFilter : "");
+                + "&region=" + regionFilter
+                + "&cause=" + causeFilter;
 
         new getWebServiceData().execute(query);
 
@@ -113,6 +117,7 @@ public class RandomizerFragment extends Fragment {
 
     class getWebServiceData extends AsyncTask {
 
+        private static final String DB_FULL_PATH = "/data/data/edu.floridapoly.mobiledeviceapps.fall22.cantdecide/databases/Can't Decide Database";
         ProgressDialog progressDialog;
         URL url;
         Bitmap bitmap;
@@ -138,9 +143,7 @@ public class RandomizerFragment extends Fragment {
             if(progressDialog.isShowing())
                 progressDialog.dismiss();
             charityTitle.setText(name);
-            BreakIterator breakIterator = BreakIterator.getSentenceInstance(Locale.US);
-            breakIterator.setText(mission);
-            charityDescription.setText(mission.substring(breakIterator.first(), breakIterator.next()));
+            charityDescription.setText(mission);
             charityLogo.setImageBitmap(bitmap);
         }
 
@@ -159,13 +162,15 @@ public class RandomizerFragment extends Fragment {
             try {
                 JSONObject targetCharity = getRandomCharity(path, response, responseText);
                 ID = targetCharity.getString("id");
-                if (!allowDuplicates) {
-                    while (dbHelper.isDuplicate(ID)) {
+                boolean emptyDB = checkDataBase();
+                if (!allowDuplicates && !emptyDB) {
+                    boolean duplicate = dbHelper.isDuplicate(ID);
+                    while (duplicate) {
                         targetCharity = getRandomCharity(path, response, responseText);
                         ID = targetCharity.getString("id");
+                        duplicate = dbHelper.isDuplicate(ID);
                     }
                 }
-
                 name = targetCharity.getString("name");
                 mission = targetCharity.getString("mission");
                 websiteURL = targetCharity.getString("website_url");
@@ -182,6 +187,7 @@ public class RandomizerFragment extends Fragment {
 
         private JSONObject getRandomCharity(String path, StringBuffer response, String responseText) throws JSONException {
             int totalResults, generatedPos, targetPage, resultIndex, perPage;
+
             JSONObject results = new JSONObject(responseText);
             totalResults = Math.min(results.getInt("total_count"), 1000);
             perPage = results.getInt("per");
@@ -225,6 +231,18 @@ public class RandomizerFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        private boolean checkDataBase() {
+            SQLiteDatabase checkDB = null;
+            try {
+                checkDB = SQLiteDatabase.openDatabase(DB_FULL_PATH, null,
+                        SQLiteDatabase.OPEN_READONLY);
+                checkDB.close();
+            } catch (SQLiteException e) {
+                // database doesn't exist yet.
+            }
+            return checkDB != null;
         }
     }
 

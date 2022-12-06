@@ -5,8 +5,15 @@
       <map>
         <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.265" />
         <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/drawable-xxxhdpi/ic_launcher_custom.xml" value="0.265" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/drawable/ic_baseline_view_list_24.xml" value="0.265" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/drawable/ic_launcher_background.xml" value="0.265" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/layout-v31/fragment_home.xml" value="0.3632246376811594" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/layout/charity_list_row.xml" value="0.3632246376811594" />
         <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/layout/fragment_listing.xml" value="0.3632246376811594" />
         <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/layout/fragment_randomizer.xml" value="0.33" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265" />
+        <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.123" />
         <entry key="..\:/Documents/GitHub/Cant-Decide/app/src/main/res/xml/preferences.xml" value="0.25" />
         <entry key="..\:/OneDrive - Florida Polytechnic University/2022 - 23 Academic Year/Fall 2022/Mobile Device Applications/Projects/CantDecide/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2625" />
         <entry key="..\:/OneDrive - Florida Polytechnic University/2022 - 23 Academic Year/Fall 2022/Mobile Device Applications/Projects/CantDecide/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.196" />

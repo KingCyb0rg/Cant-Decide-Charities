@@ -10,12 +10,14 @@
         android:id="@+id/RandomizeButton"
         android:layout_width="212dp"
         android:layout_height="55dp"
+        android:layout_marginBottom="52dp"
+        android:backgroundTint="#fcceb0"
+        android:fontFamily="@font/concertone"
         android:text="@string/start_randomizer"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -42,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:text="Current Selected Cause: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:textAllCaps="false" />
+                app:textAllCaps="false"
+                android:fontFamily="@font/concertone"/>
 
             <TextView
                 android:id="@+id/CauseText"
@@ -50,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:textAllCaps="false" />
+                app:textAllCaps="false"
+                />
 
         </LinearLayout>
 
@@ -67,7 +71,8 @@
                 android:layout_height="wrap_content"
                 android:text="Current Selected Region: "
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:textAllCaps="false" />
+                app:textAllCaps="false"
+                android:fontFamily="@font/concertone"/>
 
             <TextView
                 android:id="@+id/RegionText"
@@ -91,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Allow Duplicates? "
+                android:fontFamily="@font/concertone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -98,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
+                android:fontFamily="@font/concertone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
@@ -114,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save Rolled Charities? "
+                android:fontFamily="@font/concertone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
@@ -121,20 +129,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
+                android:fontFamily="@font/concertone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         </LinearLayout>
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="389dp"
-        android:layout_height="235dp"
-        android:layout_marginTop="56dp"
-        android:padding="10dp"
-        android:src="@mipmap/ic_launcher_custom"
+        android:id="@+id/appLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/RandomizeButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682"
+        app:srcCompat="@mipmap/ic_launcher_round" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

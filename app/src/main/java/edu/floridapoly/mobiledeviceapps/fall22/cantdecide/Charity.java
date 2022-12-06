@@ -4,18 +4,16 @@ public class Charity {
     private String id;
     private String name;
     private String mission;
-    private String region;
-    private String cause;
     private String website;
+    private String logoURL;
 
     public Charity(){}
-    public Charity(String id, String name, String mission, String website/*, String cause, String region */) {
+    public Charity(String id, String name, String mission, String website, String logoURL) {
         this.id = id;
         this.name = name;
         this.mission = mission;
         this.website = website;
-//        this.cause = cause;
-//        this.region = region;
+        this.logoURL = logoURL;
     }
 
     public String getId() {
@@ -50,19 +48,11 @@ public class Charity {
         this.website = website;
     }
 
-    public String getRegion() {
-        return region;
+    public String getLogoURL() {
+        return logoURL;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getCause() {
-        return cause;
-    }
-
-    public void setCause(String cause) {
-        this.cause = cause;
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 }

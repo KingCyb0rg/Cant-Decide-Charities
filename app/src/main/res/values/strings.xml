@@ -6,7 +6,7 @@
     <string name="charities">Charities</string>
     <string name="settings">Settings</string>
     <string name="Charity_Description">Charity Description goes here!</string>
-    <string name="start_randomizer">Start Randomizer</string>
+    <string name="start_randomizer">Randomize</string>
     <string name="allow_duplicates">Allow Duplicates</string>
     <string name="save_rolled_charities">Save Rolled Charities</string>
     <string name="visit_their_website">Visit Their Website!</string>

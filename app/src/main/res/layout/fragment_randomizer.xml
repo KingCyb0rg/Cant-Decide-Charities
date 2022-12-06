@@ -6,48 +6,78 @@
     android:layout_height="match_parent"
     tools:context=".RandomizerFragment">
 
-    <ImageView
-        android:id="@+id/CharityLogo"
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/CharityDesc"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@tools:sample/backgrounds/scenic" />
-
     <TextView
         android:id="@+id/CharityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="128dp"
         android:gravity="center"
-        android:text="Placeholder Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/CharityLogo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        android:fontFamily="@font/concertone"
+        android:text="No Charity"/>
 
-    <TextView
-        android:id="@+id/CharityDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:gravity="start | center"
-        android:text="@string/Charity_Description"
-        android:textColor="#000000"
+    <ImageView
+        android:id="@+id/CharityLogo"
+        android:layout_width="0dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CharityName"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ScrollView
+        android:layout_width="412dp"
+        android:layout_height="197dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CharityLogo"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/CharityDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
+                android:fontFamily="@font/concertone"
+                android:gravity="start | center"
+                android:text="No Charity"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/WebsiteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:drawableStart="@drawable/ic_baseline_open_in_browser_24"
+        android:fontFamily="@font/concertone"
+        android:padding="10dp"
+        android:text="@string/visit_their_website"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
+        android:layout_marginBottom="24dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/WebsiteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent">
@@ -57,7 +87,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_baseline_check_circle_24"
-            android:contentDescription="@string/save_charity" />
+            android:contentDescription="@string/save_charity"
+            android:fontFamily="@font/concertone" />
 
         <Space
             android:layout_width="100dp"
@@ -68,23 +99,9 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/ic_baseline_cancel_24"
-            android:contentDescription="@string/roll_again" />
+            android:contentDescription="@string/roll_again"
+            android:fontFamily="@font/concertone" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/WebsiteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:drawableStart="@drawable/ic_baseline_open_in_browser_24"
-        android:padding="10dp"
-        android:text="@string/visit_their_website"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

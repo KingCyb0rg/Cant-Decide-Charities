@@ -24,12 +24,10 @@ public class CharityAdapter extends RecyclerView.Adapter<CharityAdapter.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public ImageView logo;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.charity_title);
-            logo = itemView.findViewById(R.id.charity_logo);
         }
     }
 
@@ -49,24 +47,10 @@ public class CharityAdapter extends RecyclerView.Adapter<CharityAdapter.MyViewHo
     public void onBindViewHolder(@NonNull  MyViewHolder holder, int position) {
         Charity charity = charityList.get(position);
         holder.title.setText(charity.getName());
-        holder.logo.setImageBitmap(parseLogoBitmap(charity.getLogoURL()));
     }
 
     @Override
     public int getItemCount() {
         return charityList.size();
-    }
-
-    private Bitmap parseLogoBitmap(String url) {
-        Bitmap bitmap = null;
-        Log.i("Logo", url);
-        try {
-            InputStream inputStream = new URL(url).openStream();
-            bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return bitmap;
     }
 }

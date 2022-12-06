@@ -108,8 +108,9 @@ public class RandomizerFragment extends Fragment {
         String regionFilter = sharedPreferences.getString("Region Filter", "");
         String causeFilter = sharedPreferences.getString("Cause Filter", "");
         String query = "https://api.pledge.to/v1/organizations?q="
-                + "&region=" + regionFilter
-                + "&cause=" + causeFilter;
+                + (regionFilter.equals("none") ? "" : "&region=" + regionFilter)
+                + (causeFilter.equals("none") ? "" : "&cause=" + causeFilter);
+        Log.i("URL", query);
 
         new getWebServiceData().execute(query);
 

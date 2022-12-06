@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -40,6 +41,9 @@ public class HomeFragment extends Fragment {
         TextView regionText = rootView.findViewById(R.id.RegionText);
         TextView duplicatesText = rootView.findViewById(R.id.DuplicateText);
         TextView saveText = rootView.findViewById(R.id.SaveText);
+        ImageView appLogo = rootView.findViewById(R.id.appLogo);
+
+        appLogo.setClipToOutline(true);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         causeText.setText(sharedPreferences.getString("Cause Filter", null));

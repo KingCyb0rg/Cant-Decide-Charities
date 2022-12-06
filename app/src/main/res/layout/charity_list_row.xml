@@ -13,8 +13,10 @@
     <TextView
         android:id="@+id/charity_title"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:layout_toEndOf="@id/charity_logo"
-        android:text="" />
+        android:text="Empty"
+        app:fontFamily="@font/concertone" />
 
 </RelativeLayout>

@@ -7,6 +7,12 @@
     tools:context=".ListingFragment">
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/concertone" />
+
     <TextView
         android:id="@+id/no_charities_text"
         style="@style/Widget.MaterialComponents.TextView"
@@ -16,12 +22,10 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="29dp"
         android:layout_marginBottom="343dp"
+        android:fontFamily="@font/concertone"
         android:gravity="center"
         android:text="No Charities Saved!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:textAllCaps="false" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </RelativeLayout>

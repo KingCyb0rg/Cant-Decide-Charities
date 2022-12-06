@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_MISSION = "Mission";
     public static final String COLUMN_WEBSITE = "Website";
+    public static final String COLUMN_LOGO = "Logo";
 
 
     public static final String CHARITY_TABLE_NAME = "Charities";
@@ -27,8 +28,8 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_ID + " TEXT PRIMARY KEY, "
             + COLUMN_NAME + " TEXT, "
             + COLUMN_MISSION + " TEXT, "
-            + COLUMN_WEBSITE + " TEXT"
-            + ")";
+            + COLUMN_WEBSITE + " TEXT,"
+            + COLUMN_LOGO + " TEXT" + " )";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -60,6 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 charity.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)));
                 charity.setMission(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MISSION)));
                 charity.setWebsite(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_WEBSITE)));
+                charity.setLogoURL(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOGO)));
                 charities.add(charity);
             } while (cursor.moveToNext());
         }
@@ -74,6 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, charity.getName());
         values.put(COLUMN_MISSION, charity.getMission());
         values.put(COLUMN_WEBSITE, charity.getWebsite());
+        values.put(COLUMN_LOGO, charity.getLogoURL());
 
         return db.insert(CHARITY_TABLE_NAME, null, values);
     }
@@ -84,6 +87,16 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
 
         return (cursor.getCount() != 0);
+    }
+
+    public int getCharityCount() {
+        String countQuery = "SELECT * FROM " + CHARITY_TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
     }
 
 }

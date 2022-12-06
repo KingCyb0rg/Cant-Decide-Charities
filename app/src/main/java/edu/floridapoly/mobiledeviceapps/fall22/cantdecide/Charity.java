@@ -5,13 +5,15 @@ public class Charity {
     private String name;
     private String mission;
     private String website;
+    private String logoURL;
 
     public Charity(){}
-    public Charity(String id, String name, String mission, String website) {
+    public Charity(String id, String name, String mission, String website, String logoURL) {
         this.id = id;
         this.name = name;
         this.mission = mission;
         this.website = website;
+        this.logoURL = logoURL;
     }
 
     public String getId() {
@@ -44,5 +46,13 @@ public class Charity {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
     }
 }

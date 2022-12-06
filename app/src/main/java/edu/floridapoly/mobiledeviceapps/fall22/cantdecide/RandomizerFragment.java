@@ -83,7 +83,7 @@ public class RandomizerFragment extends Fragment {
 
         acceptButton.setOnClickListener(view -> {
             if (saveCharities) {
-                randomCharity = new Charity(ID, name, mission, websiteURL);
+                randomCharity = new Charity(ID, name, mission, websiteURL, logoURL);
                 dbHelper.insertCharity(randomCharity);
                 Toast.makeText(getContext(), "Charity accepted, added to rolled charity listing", Toast.LENGTH_SHORT).show();
             }
@@ -175,7 +175,7 @@ public class RandomizerFragment extends Fragment {
                 mission = targetCharity.getString("mission");
                 websiteURL = targetCharity.getString("website_url");
                 logoURL = targetCharity.getString("logo_url");
-
+                Log.i("Logo", logoURL);
                 // Turn the http url from the charity JSON into a viewable image
                 InputStream inputStream = new URL(logoURL).openStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
